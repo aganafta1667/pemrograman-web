@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id" data-base="../">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarana &amp; Prasarana - SMA Negeri 2 Madiun</title>
+    <link rel="icon" type="logo" href="/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { 
+        theme: { 
+          extend: {
+            colors: { ink: '#111827','ink-soft': '#4B5563',brick: '#8C331D',gold: '#C89B3C',forest: '#2C4A3E',cream: '#F8F6F0',paper: '#FFFFFF'
+            },
+            fontFamily: { 
+              sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              serif: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            },
+          }
+        }
+      };
+    </script>
+    <style>
+      body { 
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, sans-serif; 
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+  </head>
+    <body class="bg-paper text-ink antialiased" data-page="profil">
+
+    <div id="site-navbar" class="sticky top-0 z-50"></div>
+
+    <main class="max-w-6xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <nav class="text-xs text-ink-soft mb-8" aria-label="Breadcrumb">
+        <a href="../index.html" class="hover:text-brick transition">Home</a> <span class="mx-1.5">–</span> <span class="text-ink font-semibold">Sarana dan Prasarana</span>
+      </nav>
+      <h1 class="text-4xl font-extrabold tracking-tight text-ink mb-4">Sarana &amp; Prasarana</h1>
+      <div class="flex flex-wrap gap-2 mb-10" id="facility-filters"></div>
+      <div id="facility-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      const FACILITIES = [
+        ["Kls X O","Kelas"],["Kls X L","Kelas"],["Kls X BSN","Kelas"],["Kls X TKJ","Kelas"],["Kls X MM","Kelas"],
+        ["Kls XI O","Kelas"],["Kls XI L","Kelas"],["Kls XI BSN","Kelas"],["Kls XI TKJ","Kelas"],["Kls XI MM","Kelas"],
+        ["Kls XII O","Kelas"],["Kls XII L","Kelas"],["Kls XII BSN","Kelas"],["Kls XII TKJ","Kelas"],["Kls XII MM","Kelas"],
+        ["Lab Komp 1","Laboratorium"],["Perpustakaan / Warnet","Belajar"],["Lab Komp 2","Laboratorium"],
+        ["Lab Otomotif","Laboratorium"],["Lab Listrik","Laboratorium"],["Lab Busana","Laboratorium"],
+        ["Lab Multimedia","Laboratorium"],["Lab TKJ","Laboratorium"],
+        ["R. Kepsek","Operasional"],["R. Tata Usaha","Operasional"],["R. Lobi","Operasional"],["R. Guru","Operasional"],
+        ["R. OSIS","Kesiswaan"],["R. PMR","Kesiswaan"],["R. BK/BP","Operasional"],["R. Piket","Operasional"],
+        ["R. Pramuka/Paskibra","Kesiswaan"],["R. Kapela/Bianglala","Penunjang"],["Gudang","Penunjang"],
+        ["Masjid","Keagamaan"],["R. DKM","Keagamaan"],["R. Satpam","Operasional"],["R. UKS","Kesiswaan"],
+        ["Padepokan Seni","Olahraga & Seni"],["GreenHouse","Penunjang"],["Parkir","Penunjang"],
+        ["Mushala Guru","Keagamaan"],["WC Guru","Penunjang"],["R. Cetak","Operasional"],["R. Wakasek","Operasional"],
+        ["Dapur","Penunjang"],["WC Guru","Penunjang"],["WC Laki-laki","Penunjang"],["WC Perempuan","Penunjang"],
+        ["Koperasi","Penunjang"],["Kantin","Penunjang"],["WC Perempuan","Penunjang"],["WC Laki-laki","Penunjang"],
+        ["G. Olahraga","Olahraga & Seni"],["Gudang Listrik","Penunjang"],["Gudang Otomotif","Penunjang"],
+        ["Gudang TIK","Penunjang"],["R. EC","Belajar"],["Panggung Terbuka","Olahraga & Seni"],
+        ["Lap. Olahraga","Olahraga & Seni"],["R. Server","Operasional"],["R. KPMP TIK","Belajar"],
+      ];
+
+      const CAT_STYLES = {
+        "Kelas": "bg-ink/5 text-ink-soft",
+        "Laboratorium": "bg-forest/10 text-forest",
+        "Belajar": "bg-forest/10 text-forest",
+        "Operasional": "bg-brick/10 text-brick",
+        "Kesiswaan": "bg-gold/15 text-gold",
+        "Keagamaan": "bg-gold/15 text-gold",
+        "Olahraga & Seni": "bg-brick/10 text-brick",
+        "Penunjang": "bg-ink/5 text-ink-soft",
+      };
+
+      function renderFacilities(filter) {
+        const grid = document.getElementById("facility-grid");
+        const items = FACILITIES
+          .map((f, i) => ({ no: i + 1, name: f[0], category: f[1] }))
+          .filter((f) => filter === "Semua" || f.category === filter);
+        grid.innerHTML = items
+          .map(
+            (f) => `<div class="flex items-center gap-4 rounded-xl border border-ink/10 px-4 py-3 bg-paper hover:border-brick/30 transition">
+              <span class="text-sm font-semibold text-ink-soft/50 w-7 shrink-0">${String(f.no).padStart(2, "0")}</span>
+              <span class="flex-1 text-sm font-bold text-ink">${f.name}</span>
+            </div>`
+          )
+          .join("");
+      }
+
+      function initFilters() {
+        const cats = ["Semua", ...new Set(FACILITIES.map((f) => f[1]))];
+        const container = document.getElementById("facility-filters");
+        container.innerHTML = cats
+          .map(
+            (c, i) => `<button data-cat="${c}" class="facility-filter-btn rounded-full border px-4 py-1.5 text-xs font-semibold transition ${i === 0 ? "bg-ink text-paper border-ink" : "border-ink/15 text-ink-soft hover:border-brick hover:text-brick"}">${c}</button>`
+          )
+          .join("");
+        container.querySelectorAll(".facility-filter-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            container.querySelectorAll(".facility-filter-btn").forEach((b) => b.classList.remove("bg-ink", "text-paper", "border-ink"));
+            container.querySelectorAll(".facility-filter-btn").forEach((b) => b.classList.add("border-ink/15", "text-ink-soft"));
+            btn.classList.add("bg-ink", "text-paper", "border-ink");
+            btn.classList.remove("border-ink/15", "text-ink-soft");
+            renderFacilities(btn.dataset.cat);
+          });
+        });
+      }
+
+      document.addEventListener("components:ready", () => {
+        initFilters();
+        renderFacilities("Semua");
+      });
+    </script>
+  </body>
+</html>

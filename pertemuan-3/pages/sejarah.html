@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id" data-base="../">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sejarah — SMA Negeri 2 Madiun</title>
+    <link rel="icon" type="logo" href="/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: { extend: {
+          colors: { ink: '#111827','ink-soft': '#4B5563',brick: '#8C331D',gold: '#C89B3C',forest: '#2C4A3E',cream: '#F8F6F0',paper: '#FFFFFF'
+          },
+          fontFamily: { 
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            serif: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+        }},
+      };
+    </script>
+    <style>
+      body { 
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, sans-serif; 
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+  </head>
+  <body class="bg-paper text-ink antialiased" data-page="profil">
+    <div id="site-navbar" class="sticky top-0 z-50"></div>
+
+    <main class="max-w-5xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <nav class="text-xs text-ink-soft mb-8" aria-label="Breadcrumb">
+        <a href="../index.html" class="hover:text-brick transition">Home</a> <span class="mx-1.5">–</span> <span class="text-ink font-semibold">Sejarah</span>
+      </nav>
+
+      <h1 class="text-4xl font-extrabold tracking-tight text-ink mb-8">Sejarah SMA Negeri 2 Madiun</h1>
+
+      <p class="text-ink-soft leading-relaxed text-sm">Di tengah situasi dan kondisi setelah perjuangan merebut kemerdekaan, masyarakat Madiun mulai peduli akan pentingnya pendidikan. Untuk itu pada tahun ajaran 1951/1952, didirikanlah sebuah lembaga pendidikan setingkat SLTA yang waktu itu bernama SMA 2C. Waktu itu sekolah ini belum mendapat pengakuan resmi dari pemerintah. Pada awal berdirinya ini, proses belajar mengajar berlangsung di Gedung SGB Negeri yang terletak di Jalan Sumatera 13 Madiun.</p>
+      <p class="text-ink-soft leading-relaxed text-sm">Pada bulan September 1953, pemerintah, yang dalam hal ini adalah Kementerian Pendidikan dan Kebudayaan mengeluarkan Surat Keputusan Penegerian SMA 2C. Dengan demikian sekolah ini resmi bernama SMA Negeri 2C Madiun, dan jabatan Kepala Sekolah dipercayakan kepada Bapak R. Martono Moedigdo. Selanjutnya, proses belajar mengajar berpindah tempat di Jalan Biliton 24 Madiun yang waktu itu juga ditempati oleh SMA Negeri 1B, sehingga siswa SMA Negeri 2C harus masuk pada siang hari.</p>
+      <br>
+
+      <img src="/images/sejarah.jpg" alt="sejarah">
+      <p class="text-xs text-ink-soft/70 mb-5 italic">sumber: 
+      <a href="http://informasimadiun.blogspot.com/2011/12/madiun-tempo-doeloe-foto-2.html">http://informasimadiun.blogspot.com/2011/12/madiun-tempo-doeloe-foto-2.html</a></p>
+
+      <p class="text-ink-soft leading-relaxed text-sm">Pada tahun 1960, SMA Negeri 1B menempati gedung baru di Jalan Mastrip, sehingga gedung di Jalan Biliton 24 digunakan sepenuhnya untuk kegiatan belajar mengajar SMA Negeri 2C. Adapun perihal gedung tersebut, konon telah berdiri sejak tahun 1930, dan dulunya merupakan asrama transit bagi calon pekerja perkebunan tembakau di Deli, Sumatera Utara. Dan gedung di Jalan Biliton 24 inilah yang digunakan sebagai tempat kegiatan belajar mengajar SMA Negeri 2 Madiun hingga sekarang.</p>
+
+      <div class="mt-14">
+        <p class="text-xs uppercase tracking-[0.10em] text-brick font-bold mb-4">Riwayat Kepala Sekolah</p>
+        <div class="overflow-x-auto rounded-2xl border border-ink/10 bg-paper">
+          <table class="w-full text-sm">
+            <thead class="bg-ink text-paper">
+              <tr><th class="text-left font-bold px-5 py-3">Periode</th><th class="text-left font-bold px-5 py-3">Nama Kepala Sekolah</th></tr>
+            </thead>
+            <tbody id="kepsek-table" class="divide-y divide-ink/10"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      const KEPSEK = [
+        ["1953–1959", "R. Martono Moedigdo"], ["1959–1962", "R.M. Moch. Sachlan"],
+        ["1962–1965", "Drs. Imam Soenardji"], ["1965–1969", "Drs. Arief Soebandi"],
+        ["1969–1972", "Stans Soeharto, B.A."], ["1972–1978", "R.M. Soemarsono"],
+        ["1978–1983", "R.M. Soerono, B.A."], ["1983–1986", "Drs. A. Erry Soegiyanto"],
+        ["1986–1992", "Drs. Soenarjo"], ["1992–1994", "Drs. Prasita"],
+        ["1994–1998", "Drs. Majangkara"], ["1998–2002", "Drs. A.P. Mulyono, M.M."],
+        ["2002–2002", "Drs. Maidi S.H., M.M., M.Pd."], ["2002–2006", "Drs. Utomo, M.Pd."],
+        ["2006–2010", "Drs. Dimyati, M.Pd."], ["2010–2018", "Drs. Heru Patriawan"],
+        ["2018–2018", "Drs. Imron Rosyidi, M.Pd."], ["2019–2025", "Pramujo Budiarto, S.Pd., M.Or."],
+        ["2025–Sekarang", "Anim Hadisusanto, S.Pd., M.Pd."],
+      ];
+      document.addEventListener("components:ready", () => {
+        document.getElementById("kepsek-table").innerHTML = KEPSEK
+          .map(([p, n], i) => `<tr class="${i === KEPSEK.length - 1 ? "bg-brick/5 font-semibold" : ""}"><td class="px-5 py-3 text-ink-soft">${p}</td><td class="px-5 py-3 text-ink">${n}</td></tr>`)
+          .join("");
+      });
+    </script>
+  </body>
+</html>

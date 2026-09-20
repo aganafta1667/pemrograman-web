@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id" data-base="../">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita - SMA Negeri 2 Madiun</title>
+    <link rel="icon" type="logo" href="/images/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { 
+        theme: { 
+          extend: {
+            colors: { ink: '#111827','ink-soft': '#4B5563',brick: '#8C331D',gold: '#C89B3C',forest: '#2C4A3E',cream: '#F8F6F0',paper: '#FFFFFF' },
+            fontFamily: { 
+              sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              serif: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            },
+          }
+        }
+      };
+    </script>
+    <style>
+      body { 
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, sans-serif; 
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+  </head>
+  <body class="bg-paper text-ink antialiased" data-page="berita">
+
+    <div id="site-navbar" class="sticky top-0 z-50"></div>
+
+    <main class="max-w-6xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-ink">Berita &amp; Kegiatan Terbaru</h1>
+        
+        <label class="relative block w-full sm:w-80 lg:w-96">
+          <svg class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-soft" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.55 4.4l3.02 3.02a.75.75 0 11-1.06 1.06l-3.02-3.02A7 7 0 012 9z" clip-rule="evenodd"/>
+          </svg>
+          <input id="news-search" type="text" placeholder="Cari judul berita…" class="w-full rounded-full border border-ink/15 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brick/40">
+        </label>
+      </div>
+
+      <div id="news-list" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"></div>
+      <p id="news-empty" class="hidden text-sm text-ink-soft mb-10">Tidak ada berita yang cocok dengan pencarian ini.</p>
+
+      <nav id="pagination" class="flex flex-wrap items-center justify-center gap-1.5" aria-label="Navigasi halaman berita"></nav>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      const PAGE_SIZE = 6;
+      let currentPage = 1;
+      let currentQuery = "";
+
+      function getFiltered() {
+        if (typeof NEWS === "undefined") return [];
+        return [...NEWS]
+          .sort((a, b) => new Date(b.date) - new Date(a.date))
+          .filter((n) => n.title.toLowerCase().includes(currentQuery.toLowerCase()));
+      }
+
+      function renderNews() {
+        const filtered = getFiltered();
+        const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+        currentPage = Math.min(currentPage, totalPages);
+        const start = (currentPage - 1) * PAGE_SIZE;
+        const pageItems = filtered.slice(start, start + PAGE_SIZE);
+
+        const list = document.getElementById("news-list");
+        const empty = document.getElementById("news-empty");
+
+        if (!pageItems.length) {
+          list.innerHTML = "";
+          empty.classList.remove("hidden");
+        } else {
+          empty.classList.add("hidden");
+          list.innerHTML = pageItems
+            .map(
+              (n) => `
+            <a href="${n.url || '#'}" class="group rounded-2xl border border-ink/10 p-6 hover:border-brick/40 hover:shadow-md transition bg-paper flex flex-col justify-between block">
+              <div>
+                <h3 class="text-lg font-bold leading-snug text-ink group-hover:text-brick transition">${n.title}</h3>
+                <p class="mt-2 text-sm text-ink-soft leading-relaxed">${n.excerpt}</p>
+              </div>
+              <p class="mt-5 text-xs text-ink-soft/70 font-semibold">${n.dateLabel}</p>
+            </a>`
+            )
+            .join("");
+        }
+
+        renderPagination(totalPages);
+      }
+
+      function renderPagination(totalPages) {
+        const nav = document.getElementById("pagination");
+        if (totalPages <= 1) { nav.innerHTML = ""; return; }
+
+        const btn = (label, page, opts = {}) => `<button data-page="${page}" ${opts.disabled ? "disabled" : ""}
+          class="pagination-btn h-9 min-w-9 px-3 rounded-full text-sm font-semibold transition
+          ${opts.active ? "bg-ink text-paper" : "border border-ink/15 text-ink-soft hover:border-brick hover:text-brick"}
+          ${opts.disabled ? "opacity-30 cursor-not-allowed" : ""}">${label}</button>`;
+
+        let html = btn("‹", currentPage - 1, { disabled: currentPage === 1 });
+        for (let p = 1; p <= totalPages; p++) {
+          html += btn(p, p, { active: p === currentPage });
+        }
+        html += btn("›", currentPage + 1, { disabled: currentPage === totalPages });
+        nav.innerHTML = html;
+
+        nav.querySelectorAll(".pagination-btn:not([disabled])").forEach((b) => {
+          b.addEventListener("click", () => {
+            currentPage = Number(b.dataset.page);
+            renderNews();
+            window.scrollTo({ top: document.getElementById("news-list").offsetTop - 140, behavior: "smooth" });
+          });
+        });
+      }
+
+      function initApp() {
+        renderNews();
+        
+        const searchInput = document.getElementById("news-search");
+        if (searchInput) {
+          searchInput.addEventListener("input", (e) => {
+            currentQuery = e.target.value;
+            currentPage = 1;
+            renderNews();
+          });
+        }
+      }
+
+      document.addEventListener("components:ready", initApp);
+      document.addEventListener("DOMContentLoaded", initApp);
+    </script>
+  </body>
+</html>

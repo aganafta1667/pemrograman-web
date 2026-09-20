@@ -1,0 +1,59 @@
+<header id="site-header" class="relative z-50 bg-cream border-b border-ink/20">
+  <div class="flex items-center justify-between px-6 lg:px-12 py-3">
+
+    <a href="https://smanegeri2madiun.sch.id/" class="flex items-center gap-3">
+      <img src="{{BASE}}images/logo-1.png" class="h-12" alt="Logo SMAN 2 Madiun">
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-1 text-sm font-medium text-ink-soft lg:ml-auto">
+      <a href="{{BASE}}index.html" class="nav-link px-3 py-2 hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor] transition-colors" data-page="index">Beranda</a>
+      <a href="{{BASE}}pages/berita.html" class="nav-link px-3 py-2 hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor] transition-colors" data-page="berita">Berita</a>
+      <a href="{{BASE}}pages/prestasi.html" class="nav-link px-3 py-2 hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor] transition-colors" data-page="prestasi">Prestasi</a>
+
+      <div class="relative group">
+        <button class="nav-link px-3 py-2 hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor] transition-colors flex items-center gap-1" data-page="profil">
+          Profil
+          <svg class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.19l3.71-3.96a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition absolute left-0 top-full pt-2 w-56 z-50">
+          <div class="rounded-lg border border-ink/10 bg-paper shadow-lg py-2">
+            <a href="{{BASE}}pages/sejarah.html" class="block px-4 py-2 text-sm text-ink-soft hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor]">Sejarah</a>
+            <a href="{{BASE}}pages/visi-misi.html" class="block px-4 py-2 text-sm text-ink-soft hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor]">Visi &amp; Misi</a>
+            <a href="{{BASE}}pages/struktur-organisasi.html" class="block px-4 py-2 text-sm text-ink-soft hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor]">Struktur Organisasi</a>
+            <a href="{{BASE}}pages/sarana-prasarana.html" class="block px-4 py-2 text-sm text-ink-soft hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor]">Sarana &amp; Prasarana</a>
+          </div>
+        </div>
+      </div>
+      
+      <a href="{{BASE}}pages/ekskul.html" class="nav-link px-3 py-2 hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor] transition-colors" data-page="ekskul">Ekstrakurikuler</a>
+
+      <a href="{{BASE}}pages/gtk.html" class="nav-link px-3 py-2 hover:text-brick [&:not(.font-bold)]:hover:[text-shadow:_0.5px_0_0_currentColor] transition-colors" data-page="gtk">Guru &amp; Karyawan</a>
+    </nav>
+
+    <button id="menu-toggle" type="button" class="lg:hidden flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 text-ink" aria-label="Buka atau tutup menu" aria-expanded="false" aria-controls="mobile-menu">
+
+      <svg id="icon-open" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M3 5.75A.75.75 0 013.75 5h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 5.75zm0 4.25a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10zm.75 3.5a.75.75 0 000 1.5h12.5a.75.75 0 000-1.5H3.75z" clip-rule="evenodd"/>
+      </svg>
+
+      <svg id="icon-close" class="h-5 w-5" style="display:none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" clip-rule="evenodd"/>
+      </svg>
+    </button>
+
+    <div id="mobile-menu" style="display:none" class="absolute inset-x-0 top-full max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-ink/10 border-b bg-paper px-6 py-3 shadow-lg">
+        <nav class="flex flex-col text-sm font-medium text-ink-soft">
+          <a href="{{BASE}}index.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Beranda</a>
+          <a href="{{BASE}}pages/berita.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Berita</a>
+          <a href="{{BASE}}pages/prestasi.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Prestasi</a>
+          <a href="{{BASE}}pages/sejarah.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Sejarah</a>
+          <a href="{{BASE}}pages/visi-misi.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Visi &amp; Misi</a>
+          <a href="{{BASE}}pages/struktur-organisasi.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Struktur Organisasi</a>
+          <a href="{{BASE}}pages/sarana-prasarana.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Sarana &amp; Prasarana</a>
+          <a href="{{BASE}}pages/ekskul.html" class="py-2.5 border-b border-ink/5 hover:text-brick font-semibold">Ekstrakurikuler</a>
+          <a href="{{BASE}}pages/gtk.html" class="py-2.5 hover:text-brick font-semibold">Guru &amp; Karyawan</a>
+        </nav>
+      </div>
+
+  </div>
+</header>

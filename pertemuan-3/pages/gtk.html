@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id" data-base="../">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guru dan Karyawan - SMA Negeri 2 Madiun</title>
+    <link rel="icon" type="logo" href="/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { 
+        theme: { 
+          extend: {
+            colors: { 
+              ink: '#111827',      
+              'ink-soft': '#4B5563',
+              brick: '#8C331D',   
+              gold: '#C89B3C',    
+              forest: '#2C4A3E', 
+              cream: '#F8F6F0',   
+              paper: '#FFFFFF' 
+            },
+            fontFamily: { 
+              sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              serif: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            },
+          }
+        }
+      };
+    </script>
+    <style>
+      body { 
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, sans-serif; 
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+  </head>
+  <body class="bg-paper text-ink antialiased" data-page="gtk">
+
+    <div id="site-navbar" class="sticky top-0 z-50"></div>
+
+    <main class="max-w-5xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <nav class="text-xs text-ink-soft mb-8" aria-label="Breadcrumb">
+        <a href="../index.html" class="hover:text-brick transition">Home</a> <span class="mx-1.5">–</span> <span class="text-ink font-semibold">GTK</span>
+      </nav>
+
+      <h1 class="text-4xl font-extrabold tracking-tight text-ink mb-4">Guru dan Tenaga Kependidikan</h1>
+
+      <label class="relative block mb-8 max-w-md">
+        <svg class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-soft" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.55 4.4l3.02 3.02a.75.75 0 11-1.06 1.06l-3.02-3.02A7 7 0 012 9z" clip-rule="evenodd"/></svg>
+        <input id="gtk-search" type="text" placeholder="Cari nama guru atau mata pelajaran…" class="w-full rounded-full border border-ink/15 bg-paper py-2.5 pl-10 pr-4 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brick/40">
+      </label>
+
+      <div class="mb-10 flex items-center gap-4">
+        <div>
+          <p class="text-xs uppercase tracking-wider text-ink-soft font-bold mb-2">Kepala Sekolah</p>
+          <p class="text-lg font-bold">Anim Hadisusanto, S.Pd., M.Pd.</p>
+        </div>
+      </div>
+
+      <div id="gtk-list" class="space-y-8"></div>
+
+      <p class="text-xs uppercase tracking-[0.25em] text-ink-soft font-bold mt-16 mb-5">Tenaga Kependidikan</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Kresno Pujo Wibowo</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Budi Santoso</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Djajani</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Dwi Juanita</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Rheni Kristiningrum</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Retno Muryaningrum</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Winarji</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Agus Susanto</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Septiyanti Kurnia Ayuningtiyas</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Emy Rianawati</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Achlisna Putri Nadifah, A.Md., A.Pkt.</div>
+        <div class="rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">Moh. Muthahar</div>
+      </div>
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      const GTK = {
+        "Fisika": ["Heru Suseno, S.Pd., M.Pd.","Agus Susilo, S.Pd., M.Pd.","Ignatia Aning P., S.Pd., M.Pd.","Suyono, M.Pd.","Wiwin Winarni, S.Pd.","Anton Feriyanto, S.Pd."],
+        "Matematika": ["Mustain, S.Pd., M.Pd.","Suhardi, S.Pd.","Yunita Wahyuningsih, S.Pd.","Suviyanti, S.Pd.","Nelse Yonita Kurniawati, S.Pd.","Bambang Sulistyono, S.Si.","Erna Sugiarti, S.Si."],
+        "Biologi": ["Wahyuni Puji Astuti, S.Si., M.Pd.","Abdi Prasetyo, S.Pd.","Nurul Ika Noviyanti, S.Pd., M.Pd.","Yeni Widyawati, S.Pd.","Dra. Neni Umi Urbaniwati"],
+        "Kimia": ["Dwi Rumi Astuti, S.Pd., M.Pd.","Kerinandhila, S.Pd.","Rina Damayanti, S.Pd.","Astrid Nurmayasari, S.Pd."],
+        "Bahasa Indonesia": ["Mashudi, S.Pd., M.Pd.","Rochmatin, S.Pd., M.Pd.","Bekti Patria Dwi Hastuti, S.S., M.Pd.","Na'iim Arsyadi Muhsin, S.S."],
+        "Bahasa Inggris": ["Eko Budiono, S.Pd.","R. Ferry Sunu Cahyanto, S.Pd., M.Pd.","Haryana, S.Pd."],
+        "Bahasa Jawa": ["Dita Candra Astari, S.Pd.","Nana Udawati, S.Pd., M.Li."],
+        "Bahasa Jepang": ["R. Kun Basuki Rahmad, S.Pd."],
+        "Sejarah": ["Neni Pujiwati, S.Pd.","Susiswo, S.Pd."],
+        "Geografi": ["Nanin Kusuma, M.Pd.","Cahyanti Worosari, S.Pd.","Zulfa Fadha'il Izzah, S.Pd."],
+        "Ekonomi": ["Ida Susanti, S.Pd.","Yosita Vemi Rismawati, M.Pd."],
+        "PPKN": ["Elvi Dwi Ariyanita, S.Pd.","Fauziyah Pratiwi, S.Pd."],
+        "Sosiologi": ["Shalsa Bela Alif Putri, S.Pd."],
+        "Pendidikan Agama Islam": ["Ahmad Amin Mushoffa, M.Pd.","Faza Fikri Tamami, S.Pd., M.Pd.","Alwi 'Ainurrofiq, S.Pd."],
+        "Pendidikan Agama Kristen": ["Rosnawati Lumentery, S.PAK., M.Pd.K."],
+        "Pendidikan Agama Katolik": ["Marselina Nango, S.Pd."],
+        "Olahraga": ["Drs. Edi Kriswanto","Muhammad Nawfal Asyrof, S.Pd.","Drs. I Nyoman Soewartadjaja, M.Pd.","Abdul Aziz, S.Pd."],
+        "Seni": ["Walidha Tanjung Files, S.Sn.","Ewinda Sukma Dewi, S.Pd.","Alpita Oktivana Pang, S.Pd."],
+        "TIK": ["Nuryanto, S.T.","Toto Hutomo, S.Kom."],
+        "PKWU": ["Dra. Etty Andiawati"],
+        "Bimbingan Konseling (BK)": ["Endang Setijarini, S.Pd.","Juanita Suryaningrum, S.Pd.","Novita Dewi Lestari, S.Pd.","Handamari Anggana Raras, M.Pd.","Muchamad Aziz Ahmadi, S.Pd."],
+      };
+
+      function renderGtk(filter = "") {
+        const q = filter.trim().toLowerCase();
+        const list = document.getElementById("gtk-list");
+        const entries = Object.entries(GTK)
+          .map(([subject, names]) => [subject, q ? names.filter((n) => n.toLowerCase().includes(q) || subject.toLowerCase().includes(q)) : names])
+          .filter(([, names]) => names.length);
+
+        if (!entries.length) {
+          list.innerHTML = `<p class="text-sm text-ink-soft">Tidak ditemukan hasil untuk “${filter}”.</p>`;
+          return;
+        }
+
+        list.innerHTML = entries
+          .map(
+            ([subject, names]) => `
+          <div>
+            <p class="text-xs uppercase tracking-[0.25em] text-ink-soft font-bold mb-3">${subject}</p>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+              ${names.map((n) => `<div class="rounded-lg border border-ink/10 px-4 py-2.5 text-sm font-semibold text-ink bg-paper hover:border-brick/30 transition">${n}</div>`).join("")}
+            </div>
+          </div>`
+          )
+          .join("");
+      }
+
+      document.addEventListener("components:ready", () => {
+        renderGtk();
+        document.getElementById("gtk-search").addEventListener("input", (e) => renderGtk(e.target.value));
+      });
+    </script>
+  </body>
+</html>

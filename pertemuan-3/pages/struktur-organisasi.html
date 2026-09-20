@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id" data-base="../">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struktur Organisasi - SMA Negeri 2 Madiun</title>
+    <link rel="icon" type="logo" href="/images/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: {
+        colors: { ink: '#111827','ink-soft': '#4B5563',brick: '#8C331D',gold: '#C89B3C',forest: '#2C4A3E',cream: '#F8F6F0',paper: '#FFFFFF'
+        },
+        fontFamily: { 
+          sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          serif: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        },
+      }}};
+    </script>
+    <style>
+      body { 
+        font-family: 'Plus Jakarta Sans', ui-sans-serif, sans-serif; 
+        -webkit-font-smoothing: antialiased;
+      }
+    </style>
+  </head>
+  <body class="bg-paper text-ink antialiased" data-page="profil">
+    <div id="site-navbar" class="sticky top-0 z-50"></div>
+
+    <main class="max-w-5xl mx-auto px-6 lg:px-12 py-12 lg:py-16">
+      <nav class="text-xs text-ink-soft mb-8" aria-label="Breadcrumb">
+        <a href="../index.html" class="hover:text-brick transition">Home</a> <span class="mx-1.5">–</span> <span class="text-ink font-semibold">Struktur Organisasi</span>
+      </nav>
+
+      <h1 class="text-4xl font-extrabold tracking-tight text-ink mb-4">Struktur Organisasi</h1>
+
+      <img src="/images/struktur-organisasi.jpg" alt="struktur-organisasi" class="my-5">
+    </main>
+
+    <div id="site-footer"></div>
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+      document.addEventListener("components:ready", () => {
+        document.getElementById("org-history").innerHTML = HISTORY
+          .map(([p,n]) => `<li class="relative pl-4"><span class="absolute -left-[29px] top-1.5 h-2.5 w-2.5 rounded-full bg-brick"></span><span class="text-xs text-ink-soft">${p}</span> — <span class="text-sm font-semibold text-ink">${n}</span></li>`)
+          .join("");
+      });
+    </script>
+  </body>
+</html>
