@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management</title>
+    <link rel="icon" href="/image/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="brand">
+            <i class="fas fa-graduation-cap"></i> Student Management
+        </div>
+        <div class="nav-menu">
+            <a href="#">Home</a>
+            <a href="#">Students</a>
+            <a href="#">About</a>
+            <i class="fas fa-user-circle user-profile"></i>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card">
+            <h2 class="card-title">Form Student</h2>
+            <form id="studentForm">
+                <input type="hidden" id="studentId">
+                
+                <div class="form-group">
+                    <label for="nim">NIM</label>
+                    <input type="text" id="nim" placeholder="Masukkan NIM" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nama">Nama Lengkap</label>
+                    <input type="text" id="nama" placeholder="Masukkan nama lengkap" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="jurusan">Jurusan</label>
+                    <select id="jurusan" required>
+                        <option value="" disabled selected hidden>Pilih Jurusan</option>
+                        <option value="Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                        <option value="Teknik Komputer">Teknik Komputer</option>
+                        <option value="Elektro">Teknik Elektro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Masukkan email" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="btnSave">
+                        <i class="fas fa-save"></i> Simpan
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="btnCancel">
+                        Batal
+                    </button>
+                    <button type="button" class="btn btn-danger" id="btnReset">
+                        <i class="fas fa-sync-alt"></i> Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <div class="table-header">
+                <h2 class="card-title">Data Mahasiswa</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Cari mahasiswa...">
+                    <button type="button" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="studentTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">No</th>
+                            <th>NIM</th>
+                            <th>Nama</th>
+                            <th>Jurusan</th>
+                            <th>Email</th>
+                            <th style="width: 100px; text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <button>&laquo;</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>&raquo;</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
