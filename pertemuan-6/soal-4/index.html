@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Drop Down List</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Dynamic Drop Down List</h2>
+        
+        <div class="dropdown-wrapper">
+            <select id="jenisProduk">
+                <option value="">Pilih Jenis Produk</option>
+                <option value="desktop">Desktop</option>
+                <option value="laptop">Laptop</option>
+                <option value="smartphone">Smartphone</option>
+            </select>
+
+            <select id="merkProduk">
+                <option value="">Pilih Merk</option>
+            </select>
+        </div>
+
+        <div class="hasil-pilihan">
+            Pilihan Anda: <span id="teksPilihan">-</span>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
