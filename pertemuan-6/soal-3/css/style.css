@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-reg {
+    width: 100%;
+    max-width: 550px;
+}
+
+.form-email {
+    width: 100%;
+    max-width: 450px;
+}
+
+.form-success {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: #3b424c;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-family: Arial, sans-serif;
+}
+
+h2 {
+    text-align: center;
+    color: #000;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #000;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    outline: none;
+}
+
+input::placeholder, 
+textarea::placeholder {
+    color: #7a8288;
+}
+
+input:focus, 
+select:focus, 
+textarea:focus {
+    border-color: #999;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.error-msg {
+    color: red;
+    font-size: 13px;
+    display: none;
+    margin-top: -10px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+    width: auto;
+}
+
+.checkbox-group label {
+    margin-bottom: 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-blue {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 4px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn-blue:hover {
+    background-color: #0056b3;
+}
+
+.btn-green {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-green:hover {
+    background-color: #45a049;
+}
+
+#backLink {
+    display: inline-block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#backLink:hover {
+    text-decoration: underline;
+}
