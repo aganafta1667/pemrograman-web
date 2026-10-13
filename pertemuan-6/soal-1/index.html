@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi Mahasiswa</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Registrasi Mahasiswa</h2>
+        <form id="registrasiForm">
+            <div class="input-group autocomplete">
+                <label for="nama">Nama Mahasiswa</label>
+                <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" autocomplete="off">
+                <div id="rekomendasi-nama" class="autocomplete-items"></div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="Email Aktif">
+            </div>
+
+            <div class="input-group">
+                <label for="jurusan">Jurusan</label>
+                <select id="jurusan" name="jurusan">
+                    <option value="">Pilih Jurusan</option>
+                    <option value="Teknik Informatika">Teknik Informatika</option>
+                    <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+                    <option value="Rekayasa Kecerdasan Artificial">Rekayasa Kecerdasan Artificial</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="nim">NIM</label>
+                <input type="text" id="nim" name="nim" placeholder="Masukkan NIM">
+            </div>
+
+            <div class="input-group">
+                <label for="matkul">Mata Kuliah</label>
+                <input type="text" id="matkul" name="matkul" placeholder="Masukkan Mata Kuliah">
+            </div>
+
+            <div class="input-group">
+                <label for="dosen">Dosen Pengampu</label>
+                <input type="text" id="dosen" name="dosen" placeholder="Masukkan Nama Dosen">
+            </div>
+
+            <button type="submit" id="submitBtn">Submit</button>
+        </form>
+    </div>
+
+    <div id="customPopup" class="popup-overlay">
+        <div class="popup-box">
+            <p id="popupMessage">Pesan Peringatan!</p>
+            <button type="button" id="closePopupBtn">Oke</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
