@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pencarian Kode Pos Indonesia</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">Kode Pos Indonesia</div>
+  </header>
+
+  <main class="container">
+    <section class="search-panel">
+      <p class="intro">Cari kode pos di wilayah Indonesia dengan memasukkan beberapa kata kunci pencarian di bawah ini.</p>
+
+      <form id="searchForm">
+        <div class="field">
+          <label for="searchType">Cari Berdasarkan</label>
+          <select id="searchType">
+            <option value="wilayah">Wilayah</option>
+            <option value="kodepos">Kode Pos</option>
+          </select>
+        </div>
+
+        <div id="sectionWilayah">
+          <div class="field">
+            <label for="province">Provinsi</label>
+            <select id="province">
+              <option value="">Pilih provinsi</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="city">Kabupaten atau Kota</label>
+            <select id="city" disabled>
+              <option value="">Pilih kabupaten/kota</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="district">Kecamatan</label>
+            <select id="district" disabled>
+              <option value="">Pilih kecamatan</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="sectionKodePos" style="display: none;">
+          <div class="field">
+            <label for="postalCodeInput">Kode Pos</label>
+            <input type="text" id="postalCodeInput" placeholder="Masukkan 5 digit kode pos (misal: 60111)" maxlength="10">
+          </div>
+        </div>
+
+        <button class="search-button" type="submit" id="submitBtn"><span aria-hidden="true">⌕</span> Cari Kode Pos</button>
+      </form>
+    </section>
+
+    <section class="results-section" aria-live="polite">
+      <div class="results-heading">
+        <div>
+          <h1>Hasil Pencarian</h1>
+          <p id="resultSummary">Pilih wilayah terlebih dahulu untuk melihat informasi kode pos.</p>
+        </div>
+      </div>
+      <div id="results" class="results-grid">
+        <div class="empty-state">
+          <p>Hasil pencarian kode pos akan ditampilkan di sini.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Kode Pos Indonesia</footer>
+  <script src="js/script.js"></script>
+</body>
+</html>
