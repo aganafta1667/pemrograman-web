@@ -1,4 +1,4 @@
-html {
+﻿html {
     scroll-behavior: smooth;
     scroll-padding-top: 85px; 
 }
@@ -17,15 +17,46 @@ body {
     transition: all 0.3s ease;
 }
 
+.brand-logo-box {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+    color: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.25);
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.navbar-brand:hover .brand-logo-box {
+    transform: scale(1.05);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .brand-title {
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #0f172a;
-    line-height: 1;
-    letter-spacing: -0.5px;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
 }
 
 .brand-subtitle {
-    font-size: 0.7rem;
-    letter-spacing: 0.5px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #64748b;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    margin-top: 1px;
 }
 
 .navbar-nav .nav-link {

@@ -84,7 +84,7 @@ function initStorage() {
 }
 
 function resetToDummyData() {
-    if (confirm("Kembalikan data anggota ke 5 data dummy default? Data pendaftaran baru lainnya akan terhapus.")) {
+    if (confirm("Kembalikan data anggota ke data default? Data pendaftaran baru lainnya akan terhapus.")) {
         localStorage.setItem('library_members', JSON.stringify(INITIAL_DUMMY_MEMBERS));
         showNotification("Data berhasil direset ke data dummy bawaan.", "info");
         loadMembers();
