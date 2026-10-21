@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibraryReg - Pendaftaran Perpustakaan</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100" tabindex="0">
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-white border-0 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2" id="toastMessage">
+                    <i class="fas fa-check-circle fs-5" id="toastIcon"></i>
+                    <span id="toastText">Aksi berhasil dilakukan.</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#beranda">
+                <i class="fas fa-book-open text-primary fs-3 me-2"></i>
+                <div>
+                    <span class="fw-bold fs-5 d-block brand-title">LibraryReg</span>
+                    <small class="text-muted brand-subtitle">Perpustakaan Universitas</small>
+                </div>
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pendaftaran">Pendaftaran</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#admin">Data Anggota</a></li>
+                </ul>
+                <div class="d-flex">
+                    <button type="button" class="btn btn-login" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        Login Petugas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="beranda" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative">
+            <div class="hero-content">
+                <h1 class="hero-title">Selamat Datang di Perpustakaan Universitas</h1>
+                <p class="hero-text">Akses ribuan koleksi buku, jurnal, e-book, dan sumber referensi untuk mendukung proses belajar, penelitian, dan pengembangan diri.</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="#pendaftaran" class="btn-daftar">
+                        <i class="fas fa-user-plus"></i> Daftar Anggota
+                    </a>
+                    <a href="#layanan" class="btn-koleksi">
+                        <i class="fas fa-layer-group"></i> Lihat Fasilitas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="layanan">
+        <div class="container features-container">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon-wrapper">
+                            <i class="fas fa-book-open feature-icon"></i>
+                        </div>
+                        <h3 class="feature-title">Koleksi Lengkap</h3>
+                        <p class="feature-desc">Lebih dari 50.000 koleksi buku dan e-book</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon-wrapper">
+                            <i class="fas fa-users feature-icon"></i>
+                        </div>
+                        <h3 class="feature-title">Akses untuk Semua</h3>
+                        <p class="feature-desc">Mahasiswa, dosen, dan tenaga kependidikan</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon-wrapper">
+                            <i class="fas fa-laptop-code feature-icon"></i>
+                        </div>
+                        <h3 class="feature-title">Layanan Digital</h3>
+                        <p class="feature-desc">Akses katalog online dan e-resources</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-card h-100">
+                        <div class="feature-icon-wrapper">
+                            <i class="far fa-clock feature-icon"></i>
+                        </div>
+                        <h3 class="feature-title">Ruang Nyaman</h3>
+                        <p class="feature-desc">Fasilitas belajar dan diskusi yang nyaman</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tentang" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="images/bg.jpg" alt="Tentang Perpustakaan" class="img-fluid rounded-4 shadow-sm">
+                </div>
+                <div class="col-md-6 ps-md-5">
+                    <h2 class="fw-bold my-3">Pusat Literasi & Inovasi Akademik</h2>
+                    <p class="text-muted">LibraryReg hadir sebagai jantung akademik universitas. Kami berkomitmen untuk menyediakan sumber daya informasi yang komprehensif, relevan, dan mutakhir guna mendukung kegiatan Tridharma Perguruan Tinggi (Pendidikan, Penelitian, dan Pengabdian Masyarakat).</p>
+                    <p class="text-muted mb-4">Dengan sistem registrasi daring terintegrasi, mahasiswa dan sivitas akademika dapat mendaftarkan akun secara instan tanpa perlu mengantre lama.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-primary me-2 fs-5"></i> <span>Lingkungan inklusif dan kondusif untuk riset akademik</span></li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-primary me-2 fs-5"></i> <span>Terintegrasi dengan pangkalan data publikasi global</span></li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-primary me-2 fs-5"></i> <span>Pelayanan sirkulasi mandiri (Self-Service Station)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pendaftaran" class="py-5" style="background-color: #f1f5f9;">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Pendaftaran Anggota Baru</h2>
+                <p class="text-muted">Isi formulir di bawah ini dengan lengkap untuk mendapatkan kartu keanggotaan perpustakaan digital.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow-sm border-0 rounded-4">
+                        <div class="card-body p-4 p-md-5">
+                            <form id="regForm">
+                                <div class="mb-3">
+                                    <label for="r_nama" class="form-label fw-semibold">Nama Lengkap</label>
+                                    <input type="text" id="r_nama" class="form-control" placeholder="Masukkan nama lengkap sesuai KTP/KTM" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="r_nim" class="form-label fw-semibold">NIM / NIP</label>
+                                    <input type="text" id="r_nim" class="form-control" placeholder="Contoh: 230101001" required>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="r_prodi" class="form-label fw-semibold">Program Studi / Unit</label>
+                                        <input type="text" id="r_prodi" class="form-control" placeholder="Contoh: Informatika" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="r_jenis" class="form-label fw-semibold">Jenis Keanggotaan</label>
+                                        <select id="r_jenis" class="form-select" required>
+                                            <option value="">Pilih Kategori...</option>
+                                            <option value="Mahasiswa">Mahasiswa</option>
+                                            <option value="Dosen">Dosen</option>
+                                            <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="r_email" class="form-label fw-semibold">Email</label>
+                                        <input type="email" id="r_email" class="form-control" placeholder="nama@email.com" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="r_telp" class="form-label fw-semibold">Nomor Telepon (WhatsApp)</label>
+                                        <input type="tel" id="r_telp" class="form-control" placeholder="Contoh: 081234567890" required>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="r_alamat" class="form-label fw-semibold">Alamat Domisili</label>
+                                    <textarea id="r_alamat" class="form-control" rows="3" placeholder="Masukkan alamat tempat tinggal saat ini" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-3 fw-bold fs-5 rounded-3 shadow-sm">
+                                    <i class="fas fa-paper-plane me-2"></i> Daftarkan Akun Sekarang
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="admin" class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Data Anggota</h2>
+                <p class="text-muted">Simulasi antarmuka petugas perpustakaan untuk membaca, mengubah, dan menghapus data anggota.</p>
+            </div>
+            
+            <div class="card shadow-sm border rounded-4">
+                <div class="card-body p-4">
+                    <div class="row mb-4 align-items-center g-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="fas fa-search text-muted"></i></span>
+                                <input type="text" id="searchInput" class="form-control bg-light border-start-0 ps-0" placeholder="Cari berdasarkan Nama, NIM/NIP, atau Prodi...">
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-md-end d-flex justify-content-md-end align-items-center gap-2">
+                            <button type="button" class="btn btn-outline-secondary btn-sm rounded-pill px-3" id="btnResetDummy" title="Muat ulang ke 5 data dummy awal">
+                                <i class="fas fa-rotate-left me-1"></i> Reset Data Dummy
+                            </button>
+                            <span class="badge bg-light text-secondary border px-3 py-2" id="memberCountBadge">
+                                Total: 0 Anggota
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="py-3 text-center" style="width: 50px;">No</th>
+                                    <th class="py-3">Nama Lengkap</th>
+                                    <th class="py-3">NIM/NIP</th>
+                                    <th class="py-3">Program Studi</th>
+                                    <th class="py-3">Jenis</th>
+                                    <th class="py-3">No. Telepon</th>
+                                    <th class="py-3">Email</th>
+                                    <th class="py-3 text-center" style="width: 140px;">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-lg">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title fw-bold" id="editModalLabel">
+                        <i class="fas fa-user-edit text-primary me-2"></i> Ubah Data Anggota
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="editForm">
+                    <div class="modal-body p-4">
+                        <input type="hidden" id="edit_old_nim">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_nama" class="form-label fw-semibold">Nama Lengkap</label>
+                                <input type="text" id="edit_nama" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_nim" class="form-label fw-semibold">NIM / NIP</label>
+                                <input type="text" id="edit_nim" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_prodi" class="form-label fw-semibold">Program Studi / Unit</label>
+                                <input type="text" id="edit_prodi" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_jenis" class="form-label fw-semibold">Jenis Keanggotaan</label>
+                                <select id="edit_jenis" class="form-select" required>
+                                    <option value="Mahasiswa">Mahasiswa</option>
+                                    <option value="Dosen">Dosen</option>
+                                    <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_email" class="form-label fw-semibold">Email</label>
+                                <input type="email" id="edit_email" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="edit_telp" class="form-label fw-semibold">Nomor Telepon</label>
+                                <input type="tel" id="edit_telp" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="edit_alamat" class="form-label fw-semibold">Alamat Domisili</label>
+                            <textarea id="edit_alamat" class="form-control" rows="2" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold">
+                            <i class="fas fa-save me-1"></i> Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title fw-bold" id="loginModalLabel">
+                        <i class="fas fa-shield-alt text-primary me-2"></i> Login Petugas Perpustakaan
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="loginForm">
+                    <div class="modal-body p-4">
+                        <div id="loginAlert" class="alert alert-danger d-none py-2 px-3 small" role="alert">
+                            <i class="fas fa-exclamation-circle me-1"></i> <span id="loginAlertText">Username atau password salah!</span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginUsername" class="form-label fw-semibold">Username Petugas</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-user text-muted"></i></span>
+                                <input type="text" class="form-control" id="loginUsername" placeholder="Contoh: admin atau petugas" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label fw-semibold">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-lock text-muted"></i></span>
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Masukkan password" required>
+                            </div>
+                        </div>
+                        <div class="text-muted small">
+                            <i class="fas fa-info-circle me-1"></i> Hint akun: username <code>admin</code> / password <code>admin123</code> (atau <code>petugas</code> / <code>petugas123</code>)
+                        </div>
+                    </div>
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary rounded-pill px-4 fw-semibold">
+                            <i class="fas fa-sign-in-alt me-1"></i> Masuk
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4 mt-auto">
+        <div class="container text-center">
+            <p class="mb-1 text-white-50">&copy; 2026 LibraryReg - All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
