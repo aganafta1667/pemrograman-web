@@ -8,12 +8,12 @@ $st = $pdo->prepare('SELECT p.id_pendaftaran, p.nomor_pendaftaran, p.status, j.n
 $st->execute([TAHUN_AJARAN, $_SESSION['user']['id']]);
 $d = $st->fetch();
 
-$stSiswa = $pdo->prepare('SELECT nisn, tempat_lahir, tanggal_lahir, alamat, asal_sekolah, no_hp FROM siswa WHERE id_user=?');
+$stSiswa = $pdo->prepare('SELECT nisn, tempat_lahir, tanggal_lahir, alamat, asal_sekolah, no_hp, foto FROM siswa WHERE id_user=?');
 $stSiswa->execute([$_SESSION['user']['id']]);
 $bio = $stSiswa->fetch();
 $biodataLengkap = true;
 if ($bio) {
-    foreach (['nisn','tempat_lahir','tanggal_lahir','alamat','asal_sekolah','no_hp'] as $col) {
+    foreach (['nisn','tempat_lahir','tanggal_lahir','alamat','asal_sekolah','no_hp','foto'] as $col) {
         if (empty($bio[$col])) {
             $biodataLengkap = false;
             break;
@@ -46,6 +46,11 @@ require_once '../includes/header.php';
       <h3 class="h4 mb-1">Selamat Datang, <?= e($_SESSION['user']['nama']) ?></h3>
       <p class="text-muted small mb-0">Portal Penerimaan Peserta Didik Baru Tahun Ajaran <?= e(TAHUN_AJARAN) ?></p>
     </div>
+    <?php if ($sudahDaftar): ?>
+      <a href="bukti.php" class="btn btn-accent">
+        <i class="bi bi-download"></i> Unduh Bukti Pendaftaran
+      </a>
+    <?php endif; ?>
   </div>
 
   <?= flash() ?>

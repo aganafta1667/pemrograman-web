@@ -4,6 +4,14 @@ require_role('siswa');
 $uid = $_SESSION['user']['id'];
 $errors = [];
 
+$fotoTipe  = ['image/jpeg' => 'jpg', 'image/png' => 'png'];
+$fotoMaks  = 2 * 1024 * 1024; // 2 MB
+$folderFoto = __DIR__ . '/../uploads/foto/';
+
+$st = $pdo->prepare('SELECT * FROM siswa WHERE id_user = ?');
+$st->execute([$uid]);
+$s = $st->fetch();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $d = array_map('trim', $_POST);
@@ -22,18 +30,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $kunci->execute([$uid, TAHUN_AJARAN]);
     if ($kunci->fetch()) $errors[] = 'Biodata tidak dapat diubah setelah pendaftaran dikirim.';
 
+    $foto = $_FILES['foto'] ?? null;
+    $adaFoto = $foto && $foto['error'] !== UPLOAD_ERR_NO_FILE;
+    $ext = '';
+    if ($adaFoto) {
+        if ($foto['error'] === UPLOAD_ERR_INI_SIZE || $foto['error'] === UPLOAD_ERR_FORM_SIZE || $foto['size'] > $fotoMaks) {
+            $errors[] = 'Ukuran foto maksimal 2 MB.';
+        } elseif ($foto['error'] !== UPLOAD_ERR_OK) {
+            $errors[] = 'Upload foto gagal (kode error ' . $foto['error'] . ').';
+        } else {
+            $mime = (new finfo(FILEINFO_MIME_TYPE))->file($foto['tmp_name']);
+            if (!isset($fotoTipe[$mime]) || @getimagesize($foto['tmp_name']) === false) {
+                $errors[] = 'Foto harus berformat JPG atau PNG.';
+            } else {
+                $ext = $fotoTipe[$mime];
+            }
+        }
+    } elseif (empty($s['foto'])) {
+        $errors[] = 'Pas foto wajib diunggah.';
+    }
+
     if (!$errors) {
-        $pdo->prepare('UPDATE siswa SET nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
-                       tanggal_lahir=?, alamat=?, asal_sekolah=?, no_hp=? WHERE id_user=?')
-            ->execute([$d['nisn'],$d['nama_lengkap'],$d['jenis_kelamin'],$d['tempat_lahir'],
-                       $d['tanggal_lahir'],$d['alamat'],$d['asal_sekolah'],$d['no_hp'],$uid]);
-        flash('Biodata berhasil disimpan.');
-        header('Location: biodata.php'); exit;
+        $fotoBaru = null;
+        if ($adaFoto) {
+            if (!is_dir($folderFoto)) mkdir($folderFoto, 0755, true);
+            $fotoBaru = 'foto_' . $s['id_siswa'] . '_' . bin2hex(random_bytes(8)) . '.' . $ext;
+            if (!move_uploaded_file($foto['tmp_name'], $folderFoto . $fotoBaru)) {
+                $errors[] = 'Gagal menyimpan foto ke server. Periksa folder uploads/foto/.';
+                $fotoBaru = null;
+            }
+        }
+    }
+
+    if (!$errors) {
+        try {
+            $pdo->prepare('UPDATE siswa SET nisn=?, nama_lengkap=?, jenis_kelamin=?, tempat_lahir=?,
+                           tanggal_lahir=?, alamat=?, asal_sekolah=?, no_hp=?, foto=COALESCE(?, foto)
+                           WHERE id_user=?')
+                ->execute([$d['nisn'],$d['nama_lengkap'],$d['jenis_kelamin'],$d['tempat_lahir'],
+                           $d['tanggal_lahir'],$d['alamat'],$d['asal_sekolah'],$d['no_hp'],$fotoBaru,$uid]);
+            
+            if ($fotoBaru && !empty($s['foto'])) @unlink($folderFoto . basename($s['foto']));
+            flash('Biodata berhasil disimpan.');
+            header('Location: biodata.php'); exit;
+        } catch (Exception $e) {
+            if ($fotoBaru) @unlink($folderFoto . $fotoBaru);
+            $errors[] = 'Gagal menyimpan biodata.';
+        }
     }
 }
-$st = $pdo->prepare('SELECT * FROM siswa WHERE id_user = ?');
-$st->execute([$uid]);
-$s = $st->fetch();
 
 $cekKunci = $pdo->prepare('SELECT 1 FROM pendaftaran p JOIN siswa s USING(id_siswa)
                            WHERE s.id_user = ? AND p.tahun_ajaran = ?');
@@ -74,8 +119,33 @@ require_once '../includes/header.php';
 
   <div class="card">
     <div class="card-body">
-      <form method="post" class="row g-3">
+      <form method="post" enctype="multipart/form-data" class="row g-3">
         <input type="hidden" name="csrf" value="<?= csrf_token() ?>">
+
+        <div class="col-12">
+          <label class="form-label d-block" for="foto">Pas Foto (3x4, JPG/PNG, maks. 2 MB)</label>
+          <div class="d-flex align-items-start gap-3">
+            <?php if (!empty($s['foto'])): ?>
+              <img id="fotoPreview" src="../lihat-foto.php?id=<?= (int)$s['id_siswa'] ?>" alt="Pas foto"
+                   style="width:96px;height:128px;object-fit:cover;border:1px solid var(--border-color);border-radius:8px;background:#fff">
+            <?php else: ?>
+              <img id="fotoPreview" alt="Pratinjau foto" hidden
+                   style="width:96px;height:128px;object-fit:cover;border:1px solid var(--border-color);border-radius:8px;background:#fff">
+              <div id="fotoKosong" class="text-center text-muted small"
+                   style="display:flex;align-items:center;justify-content:center;width:96px;height:128px;border:1px dashed var(--border-color);border-radius:8px;background:var(--bg-surface-subtle)">
+                Belum ada foto
+              </div>
+            <?php endif; ?>
+            <div class="flex-grow-1">
+              <input type="file" id="foto" name="foto" class="form-control" accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                     <?= empty($s['foto']) ? 'required' : '' ?> <?= $terkunci ? 'disabled' : '' ?>>
+              <div class="form-text">
+                Gunakan foto formal dengan wajah terlihat jelas dan latar polos.
+                <?= !empty($s['foto']) ? 'Kosongkan jika tidak ingin mengganti foto.' : '' ?>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="col-md-6">
           <label class="form-label" for="nisn">NISN (10 Digit Angka)</label>
@@ -132,5 +202,26 @@ require_once '../includes/header.php';
     </div>
   </div>
 </div>
+
+<script>
+(function () {
+  var input = document.getElementById('foto');
+  var img = document.getElementById('fotoPreview');
+  var kosong = document.getElementById('fotoKosong');
+  if (!input) return;
+  input.addEventListener('change', function () {
+    var f = input.files[0];
+    if (!f) return;
+    if (f.size > 2 * 1024 * 1024) {
+      alert('Ukuran foto maksimal 2 MB.');
+      input.value = '';
+      return;
+    }
+    img.src = URL.createObjectURL(f);
+    img.hidden = false;
+    if (kosong) kosong.hidden = true;
+  });
+})();
+</script>
 
 <?php require_once '../includes/footer.php'; ?>

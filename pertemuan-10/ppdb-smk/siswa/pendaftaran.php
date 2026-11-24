@@ -9,7 +9,7 @@ $st->execute([$uid]);
 $s = $st->fetch();
 
 $lengkap = true;
-foreach (['nisn','nama_lengkap','jenis_kelamin','tempat_lahir','tanggal_lahir','alamat','asal_sekolah','no_hp'] as $f)
+foreach (['nisn','nama_lengkap','jenis_kelamin','tempat_lahir','tanggal_lahir','alamat','asal_sekolah','no_hp','foto'] as $f)
     if (empty($s[$f])) $lengkap = false;
 
 $st = $pdo->prepare('SELECT p.*, j.nama_jurusan FROM pendaftaran p
@@ -90,9 +90,14 @@ require_once '../includes/header.php';
       </div>
       <div class="card-footer bg-white border-top p-3 d-flex justify-content-between align-items-center">
         <span class="small text-muted"><i class="bi bi-check-circle text-success me-1"></i> Data pendaftaran telah terkunci.</span>
-        <a href="upload_berkas.php" class="btn btn-sm btn-primary">
-          <i class="bi bi-cloud-arrow-up"></i> Upload Berkas Sekarang
-        </a>
+        <div class="d-flex gap-2">
+          <a href="bukti.php" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-download"></i> Unduh Bukti
+          </a>
+          <a href="upload_berkas.php" class="btn btn-sm btn-primary">
+            <i class="bi bi-cloud-arrow-up"></i> Upload Berkas
+          </a>
+        </div>
       </div>
     </div>
 

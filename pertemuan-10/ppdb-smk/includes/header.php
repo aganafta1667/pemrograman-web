@@ -47,6 +47,7 @@ $currentUser = $_SESSION['user'] ?? null;
           <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'pendaftaran.php') ? 'active' : '' ?>" href="<?= $prefix ?>siswa/pendaftaran.php">Pendaftaran</a></li>
           <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'upload_berkas.php') ? 'active' : '' ?>" href="<?= $prefix ?>siswa/upload_berkas.php">Berkas</a></li>
           <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'status.php') ? 'active' : '' ?>" href="<?= $prefix ?>siswa/status.php">Status</a></li>
+          <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'bukti.php') ? 'active' : '' ?>" href="<?= $prefix ?>siswa/bukti.php">Bukti</a></li>
         <?php else: ?>
           <li class="nav-item mx-3"><a class="nav-link" href="<?= $prefix ?>index.php#jurusan">Program Keahlian</a></li>
           <li class="nav-item mx-3"><a class="nav-link" href="<?= $prefix ?>index.php#persyaratan">Persyaratan</a></li>
