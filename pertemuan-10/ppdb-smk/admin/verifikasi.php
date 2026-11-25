@@ -1,6 +1,6 @@
 <?php
 require_once '../includes/auth.php';
-require_role('admin');
+require_role(AKSES['verifikasi']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            VALUES (?,?,?,?,?)')
                 ->execute([$id, $p['status'], $baru, $catatan, $_SESSION['user']['id']]);
             $pdo->commit();
+            log_activity("Mengubah status pendaftaran #$id: {$p['status']} menjadi $baru");
             flash('Status berhasil diperbarui.');
         } catch (Exception $e) {
             if ($pdo->inTransaction()) $pdo->rollBack();
@@ -97,7 +98,7 @@ require_once '../includes/header.php';
             </tr>
           <?php endif; ?>
 
-          <?php foreach ($rows as $r): ?>
+          <?php foreach ($rows as $r): $badgeClass = 'badge-status-' . strtolower($r['status']); ?>
             <tr>
               <td class="fw-bold text-primary font-heading small">
                 <?= e($r['nomor_pendaftaran']) ?>

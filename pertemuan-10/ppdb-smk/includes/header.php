@@ -36,11 +36,20 @@ $currentUser = $_SESSION['user'] ?? null;
     
     <div class="collapse navbar-collapse" id="mainMenu">
       <ul class="navbar-nav mx-auto mb-2 mb-md-0">
-        <?php if (!empty($currentUser) && $currentUser['role'] === 'admin'): ?>
-          <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'dashboard.php') ? 'active' : '' ?>" href="<?= $prefix ?>admin/dashboard.php">Dashboard</a></li>
-          <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'jurusan.php') ? 'active' : '' ?>" href="<?= $prefix ?>admin/jurusan.php">Jurusan</a></li>
-          <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'verifikasi.php') ? 'active' : '' ?>" href="<?= $prefix ?>admin/verifikasi.php">Verifikasi</a></li>
-          <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'laporan.php') ? 'active' : '' ?>" href="<?= $prefix ?>admin/laporan.php">Laporan</a></li>
+        <?php if (!empty($currentUser) && in_array($currentUser['role'], ROLE_STAFF, true)): ?>
+          <?php
+            $menuStaff = [
+              ['Dashboard',  'admin/dashboard.php',       'admin/dashboard.php', 'admin_dashboard'],
+              ['Pengguna',   'admin/users/index.php',     '/admin/users/',       'users'],
+              ['Jurusan',    'admin/jurusan.php',         'jurusan.php',         'jurusan'],
+              ['Verifikasi', 'admin/verifikasi.php',      'verifikasi.php',      'verifikasi'],
+              ['Laporan',    'admin/laporan.php',         'laporan.php',         'laporan'],
+            ];
+            foreach ($menuStaff as [$lbl, $href, $cocok, $modul]):
+              if (!can($modul)) continue;
+          ?>
+          <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', $cocok) ? 'active' : '' ?>" href="<?= $prefix . $href ?>"><?= e($lbl) ?></a></li>
+          <?php endforeach; ?>
         <?php elseif (!empty($currentUser) && $currentUser['role'] === 'siswa'): ?>
           <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'dashboard.php') ? 'active' : '' ?>" href="<?= $prefix ?>siswa/dashboard.php">Dashboard</a></li>
           <li class="nav-item mx-3"><a class="nav-link <?= str_contains($_SERVER['SCRIPT_NAME'] ?? '', 'biodata.php') ? 'active' : '' ?>" href="<?= $prefix ?>siswa/biodata.php">Biodata</a></li>

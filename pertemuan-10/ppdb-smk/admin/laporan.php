@@ -1,6 +1,6 @@
 <?php
 require_once '../includes/auth.php';
-require_role('admin');
+require_role(AKSES['laporan']);
 
 $statusList = ['Menunggu', 'Diverifikasi', 'Diterima', 'Ditolak'];
 $status = $_GET['status'] ?? '';
@@ -235,7 +235,7 @@ require_once '../includes/header.php';
             </tr>
           <?php endif; ?>
 
-          <?php foreach ($data as $i => $r): ?>
+          <?php foreach ($data as $i => $r): $badgeClass = 'badge-status-' . strtolower($r['status']); ?>
             <tr>
               <td class="text-center text-muted small"><?= $i + 1 ?></td>
               <td class="font-heading small fw-bold text-primary"><?= e($r['nomor_pendaftaran']) ?></td>

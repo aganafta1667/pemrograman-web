@@ -69,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            WHERE id_user=?')
                 ->execute([$d['nisn'],$d['nama_lengkap'],$d['jenis_kelamin'],$d['tempat_lahir'],
                            $d['tanggal_lahir'],$d['alamat'],$d['asal_sekolah'],$d['no_hp'],$fotoBaru,$uid]);
-            
             if ($fotoBaru && !empty($s['foto'])) @unlink($folderFoto . basename($s['foto']));
             flash('Biodata berhasil disimpan.');
             header('Location: biodata.php'); exit;

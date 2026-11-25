@@ -5,7 +5,7 @@ $jurusan = $pdo->query('SELECT kode_jurusan, nama_jurusan, kuota, deskripsi
                         FROM jurusan WHERE is_active = 1 ORDER BY nama_jurusan')->fetchAll();
 
 $user = $_SESSION['user'] ?? null;
-$dashboard = $user ? BASE_URL . ($user['role'] === 'admin' ? '/admin/dashboard.php' : '/siswa/dashboard.php') : null;
+$dashboard = $user ? home_url($user['role']) : null;
 
 $judul = 'Beranda';
 $css_prefix = '';

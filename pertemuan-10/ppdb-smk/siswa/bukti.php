@@ -135,7 +135,7 @@ require_once '../includes/header.php';
           <tr><td>Pilihan jurusan</td><td><strong><?= e($p['kode_jurusan'] . ' - ' . $p['nama_jurusan']) ?></strong></td></tr>
           <tr><td>Tanggal pendaftaran</td><td><?= e(date('d-m-Y H:i', strtotime($p['tanggal_daftar']))) ?> WIB</td></tr>
           <tr><td>Status saat dicetak</td>
-              <td><span class="<?= e(strtolower($p['status'])) ?>"><?= e($p['status']) ?></span></td></tr>
+              <td><span class="badge-status badge-status-<?= e(strtolower($p['status'])) ?>"><?= e($p['status']) ?></span></td></tr>
           <tr><td>Berkas terunggah</td>
               <td>
                 <?php

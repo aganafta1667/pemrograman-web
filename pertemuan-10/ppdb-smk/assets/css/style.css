@@ -631,3 +631,42 @@ a.card-action:hover {
     padding-right: 3rem;
   }
 }
+
+.badge-role {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge-role-admin {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-color: #c5dce1;
+}
+.badge-role-panitia {
+  background-color: var(--status-diverifikasi-bg);
+  color: var(--status-diverifikasi-text);
+  border-color: var(--status-diverifikasi-border);
+}
+.badge-role-verifikator {
+  background-color: var(--status-diterima-bg);
+  color: var(--status-diterima-text);
+  border-color: var(--status-diterima-border);
+}
+.badge-role-siswa {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent-hover);
+  border-color: #f8d3b8;
+}
+.badge-status-nonaktif {
+  background-color: var(--bg-surface-subtle);
+  color: var(--text-muted);
+  border-color: var(--border-color);
+}
+.badge-status-nonaktif::before {
+  background-color: var(--text-muted);
+}

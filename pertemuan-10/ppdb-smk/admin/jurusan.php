@@ -1,6 +1,6 @@
 <?php
 require_once '../includes/auth.php';
-require_role('admin');
+require_role(AKSES['jurusan']);
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

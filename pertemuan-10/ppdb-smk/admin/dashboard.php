@@ -1,6 +1,12 @@
 <?php
 require_once '../includes/auth.php';
-require_role('admin');
+require_role(AKSES['admin_dashboard']);
+
+if (can('users')) {
+    $perRole = $pdo->query('SELECT role, COUNT(*) FROM users GROUP BY role')->fetchAll(PDO::FETCH_KEY_PAIR);
+    $logTerbaru = $pdo->query('SELECT l.aktivitas, l.created_at, u.nama FROM activity_logs l
+                               LEFT JOIN users u ON u.id_user = l.id_user ORDER BY l.id DESC LIMIT 6')->fetchAll();
+}
 
 $total = $pdo->query('SELECT COUNT(*) FROM pendaftaran')->fetchColumn();
 $perStatus = $pdo->query('SELECT status, COUNT(*) n FROM pendaftaran GROUP BY status')->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -16,16 +22,25 @@ require_once '../includes/header.php';
 <div class="container py-4">
   <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-4 pb-2 border-bottom">
     <div>
-      <h3 class="h4 mb-1">Dashboard Administrator</h3>
+      <h3 class="h4 mb-1">Dashboard <?= e(ROLE_LABEL[$_SESSION['user']['role']] ?? '') ?></h3>
       <p class="text-muted small mb-0">Ringkasan pendaftaran dan kuota PPDB SMK Nusantara</p>
     </div>
     <div class="d-flex gap-2">
+      <?php if (can('verifikasi')): ?>
       <a href="verifikasi.php" class="btn btn-primary btn-sm">
         <i class="bi bi-check2-square"></i> Verifikasi Berkas
       </a>
+      <?php endif; ?>
+      <?php if (can('laporan')): ?>
       <a href="laporan.php" class="btn btn-outline-secondary btn-sm">
         <i class="bi bi-file-earmark-bar-graph"></i> Buka Laporan
       </a>
+      <?php endif; ?>
+      <?php if (can('users')): ?>
+      <a href="users/index.php" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-people"></i> Pengguna
+      </a>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -77,10 +92,12 @@ require_once '../includes/header.php';
 
   <div class="card mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
-      Ringkasan Keterisian Kuota Jurusan</span>
+      <span>Ringkasan Keterisian Kuota Jurusan</span>
+      <?php if (can('jurusan')): ?>
       <a href="jurusan.php" class="btn btn-sm btn-outline-primary">
         <i class="bi bi-gear"></i> Kelola Jurusan
       </a>
+      <?php endif; ?>
     </div>
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">
@@ -115,6 +132,46 @@ require_once '../includes/header.php';
       </table>
     </div>
   </div>
+
+  <?php if (can('users')): ?>
+  <div class="row g-3">
+    <div class="col-lg-5">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Pengguna per Role</span>
+          <a href="users/index.php" class="btn btn-sm btn-outline-primary">Kelola</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          <?php foreach (ROLE_LABEL as $k => $lbl): ?>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <?= role_badge($k) ?>
+              <strong><?= (int)($perRole[$k] ?? 0) ?></strong>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="card h-100">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Aktivitas Terbaru</span>
+          <a href="users/logs.php" class="btn btn-sm btn-outline-primary">Semua log</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          <?php if (!$logTerbaru): ?>
+            <li class="list-group-item text-muted">Belum ada aktivitas tercatat.</li>
+          <?php endif; ?>
+          <?php foreach ($logTerbaru as $l): ?>
+            <li class="list-group-item">
+              <div><?= e($l['aktivitas']) ?></div>
+              <div class="small text-muted"><?= e($l['nama'] ?? '(akun dihapus)') ?> &middot; <?= e(date('d-m-Y H:i', strtotime($l['created_at']))) ?></div>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <?php endif; ?>
 </div>
 
 <?php require_once '../includes/footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/auth.php';
-if (empty($_SESSION['user'])) { http_response_code(403); exit('Akses ditolak.'); }
+if (!current_user_valid()) { http_response_code(403); exit('Akses ditolak.'); }
 
 $id = (int)($_GET['id'] ?? 0);
 $st = $pdo->prepare('SELECT b.nama_file, s.id_user
@@ -11,7 +11,7 @@ $st = $pdo->prepare('SELECT b.nama_file, s.id_user
 $st->execute([$id]);
 $row = $st->fetch();
 
-$boleh = $row && ($_SESSION['user']['role'] === 'admin' || (int)$row['id_user'] === (int)$_SESSION['user']['id']);
+$boleh = $row && (can('berkas') || (int)$row['id_user'] === (int)$_SESSION['user']['id']);
 if (!$boleh) { http_response_code(403); exit('Akses ditolak.'); }
 
 $path = __DIR__ . '/uploads/' . basename($row['nama_file']);

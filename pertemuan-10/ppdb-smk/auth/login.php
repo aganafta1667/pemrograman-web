@@ -7,12 +7,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $st->execute([trim($_POST['email'] ?? '')]);
     $u = $st->fetch();
     if ($u && password_verify($_POST['password'] ?? '', $u['password'])) {
-        session_regenerate_id(true);
-        $_SESSION['user'] = ['id' => $u['id_user'], 'nama' => $u['nama'], 'role' => $u['role']];
-        header('Location: ' . BASE_URL . ($u['role'] === 'admin' ? '/admin/dashboard.php' : '/siswa/dashboard.php'));
-        exit;
+        if (!$u['is_active']) {
+            $error = 'Akun Anda dinonaktifkan. Silakan hubungi administrator.';
+        } else {
+            session_regenerate_id(true);
+            $_SESSION['user'] = ['id' => $u['id_user'], 'nama' => $u['nama'], 'role' => $u['role']];
+            log_activity('Login', (int)$u['id_user']);
+            header('Location: ' . home_url($u['role']));
+            exit;
+        }
+    } else {
+        $error = 'Email atau password salah.';
     }
-    $error = 'Email atau password salah.';
 }
 
 $judul = 'Login Akun';

@@ -1,14 +1,14 @@
 <?php
 require_once 'includes/auth.php';
-if (empty($_SESSION['user'])) { http_response_code(403); exit('Akses ditolak.'); }
+if (!current_user_valid()) { http_response_code(403); exit('Akses ditolak.'); }
 
-$id = (int)($_GET['id'] ?? 0);   
+$id = (int)($_GET['id'] ?? 0);   // id_siswa
 $st = $pdo->prepare('SELECT foto, id_user FROM siswa WHERE id_siswa = ?');
 $st->execute([$id]);
 $row = $st->fetch();
 
 $boleh = $row && !empty($row['foto'])
-    && ($_SESSION['user']['role'] === 'admin' || (int)$row['id_user'] === (int)$_SESSION['user']['id']);
+    && (can('berkas') || (int)$row['id_user'] === (int)$_SESSION['user']['id']);
 if (!$boleh) { http_response_code(404); exit('Foto tidak ditemukan.'); }
 
 $path = __DIR__ . '/uploads/foto/' . basename($row['foto']);
